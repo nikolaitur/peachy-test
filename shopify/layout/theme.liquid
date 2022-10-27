@@ -26,8 +26,12 @@
     <script src="{{ 'jquery-3.6.0.min.static.js' | asset_url }}"></script>
     {% comment %}theme-check-enable ParserBlockingJavaScript{% endcomment %}
     <script src="{{ 'rivets-cart.min.static.js' | asset_url }}" defer></script>
-    <script src="{{ 'option_selection.js' | shopify_asset_url }}" defer>
-    </script>
+    <script
+      src="{{ 'option_selection.js' | shopify_asset_url }}"
+      defer
+    ></script>
+
+    {{ 'fonts.static.css' | asset_url | stylesheet_tag }}
 
     {{ 'bundle.css' | asset_url | stylesheet_tag }}
     {{ content_for_header }}

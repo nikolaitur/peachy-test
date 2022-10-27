@@ -1,0 +1,66 @@
+<div class="product-grid-item bg-linen rounded-[12px] border-4 border-cinderella p-5">
+  <a href="{{ product.url | within: collection }}" class="block relative">
+    <img
+      sizes="
+        (min-width: 768px) 450px,
+        630px
+      "
+      srcset="
+        {{ product.featured_image.src | img_url: '450x' }} 450w,
+        {{ product.featured_image.src | img_url: '630x' }} 630w
+      "
+      src="{{ product.featured_image.src | img_url: '630x' }}"
+      alt="{{ product.featured_image.alt | escape }}"
+      loading="lazy"
+      class=""
+    >
+  </a>
+  <div class="mt-5">
+    <a
+      href="{{ product.url | within: collection }}"
+      class="font-adorn text-mine-shaft text-[30px] text-center leading-none mb-5 block"
+    >
+      {{- product.title -}}
+    </a>
+    {% if product.available %}
+      <select
+        data-variant-selector
+        class="{% if product.has_only_default_variant %}hidden{% endif %} w-full bg-transparent font-futura py-2 border-b border-cinderella outline-0 appearance-none"
+      >
+        {% for variant in product.variants %}
+          {% if variant.available %}
+            <option
+              value="{{ variant.id }}"
+              data-price="{{ variant.price | money_without_currency }}"
+            >
+              {{ variant.title }}
+            </option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    {% endif %}
+    <button
+      data-add-to-cart
+      {% unless product.available %}
+        disabled
+      {% endunless %}
+      class="border-2 border-mine-shaft font-futura  w-full h-[45px] uppercase relative hover:translate-x-[-2px] hover:translate-y-[-2px] transition-all duration-300"
+    >
+      <div
+        class="shadow-behind absolute z-0 top-0 left-0 w-full h-full bg-mine-shaft  transition-all duration-300"
+      ></div>
+      <div class="bg-candlelight relative z-10 w-full h-full flex items-center justify-center">
+        {% if product.available %}
+          $<span class="price">
+            {{-
+              product.selected_or_first_available_variant.price
+              | money_without_currency
+            -}}</span
+          >&nbsp; USD &nbsp;|&nbsp;Add to Cart
+        {% else %}
+          Sold Out
+        {% endif %}
+      </div>
+    </button>
+  </div>
+</div>

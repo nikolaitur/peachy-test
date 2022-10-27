@@ -11,3 +11,25 @@
 @import "tailwindcss/utilities";
 @layer utilities {
 }
+
+[data-add-to-cart]:hover {
+  .shadow-behind {
+    transform: translate(6px, 6px);
+  }
+}
+
+.main-collection {
+  .swiper-pagination {
+    bottom: 40px;
+  }
+
+  .swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    margin: 0 4px;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: #ffd11f;
+  }
+}
