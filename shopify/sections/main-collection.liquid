@@ -1,17 +1,19 @@
-<div class="main-collection py-[74px] md:py-12 text-center container swiper">
-  <div class="font-adorn uppercase text-[42px] md:text-[66px]">
-    {{ section.settings.title }}
+<div class="collection-template">
+  <div class="main-collection py-[74px] md:py-12 text-center container swiper">
+    <div class="font-adorn uppercase text-[42px] md:text-[66px]">
+      {{ section.settings.title }}
+    </div>
+    <div class="md:grid md:grid-cols-3 xl:grid-cols-4 mt-16 md:mt-6 md:gap-4 xl:gap-8 swiper-wrapper">
+      {% paginate collection.products by 12 %}
+        {% for product in collection.products %}
+          <div class="swiper-slide px-4">
+            {% render 'product-grid-item', product: product %}
+          </div>
+        {% endfor %}
+      {% endpaginate %}
+    </div>
+    <div class="swiper-pagination"></div>
   </div>
-  <div class="md:grid md:grid-cols-4 mt-16 md:mt-6 md:gap-8 swiper-wrapper">
-    {% paginate collection.products by 12 %}
-      {% for product in collection.products %}
-        <div class="swiper-slide px-4">
-          {% render 'product-grid-item', product: product %}
-        </div>
-      {% endfor %}
-    {% endpaginate %}
-  </div>
-  <div class="swiper-pagination"></div>
 </div>
 
 <style>
@@ -21,7 +23,7 @@
     background-position: 100% 16px;
   }
 
-  .main-collection {
+  .collection-template {
     background-image: url({{'collection-bg.static.png'|asset_url}});
     background-repeat: no-repeat;
     background-size: 100% auto;
